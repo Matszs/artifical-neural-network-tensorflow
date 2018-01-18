@@ -1,5 +1,5 @@
 ![TensorFlow Logo](https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688)
-#XOR MET TENSORFLOW
+# XOR MET TENSORFLOW
 Auteurs: Mats Otten en Patrick Hendriks
 
 Machine learning wordt vaak toegepast op problemen waar mensen geen directe logische oplossing voor lijken te hebben.
@@ -41,25 +41,32 @@ De gewichten van de bias connecties geven we initieel een 0. Ook deze worden tij
 Zoals eerder gezegd maken we in TensorFlow gebruik van matrixen. Dit zijn eigenlijk één- of meerdimensionale arrays. Eendimensionale matrixen worden ook wel vectors genoemd. Het voordeel van het gebruiken van Matrixen is dat je in TensorFlow op een gemakkelijke manier deze met elkaar kunt vermenigvuldigen, of natuurlijk andere wiskundige operaties mee kunt uitvoeren.
 
 Het vermenigvuldigen van input matrix x_ met de bijbehorende gewichten:
-
+```python
 tf.matmul(x_, Theta1)
+```
 #### Variabelen
 In TensorFlow heb je twee soorten variabelen. De eerste soort variabelen heten placeholder en worden voornamelijk gebruikt voor je input (trainings-) data. De naam placeholder komt voor uit het feit dat ze niet gelijk geïnitialiseerd worden, maar tijdens het trainen iedere keer een nieuwe (of dezelfde) trainingsdata krijgen toegewezen. Hieronder maken we een placeholder aan van het type float32 en een grootte van een matrix van 4x2.
-
+```python
 x_ = tf.placeholder(tf.float32, shape=[4,2], name="x-input")
+```
 Als we de placeholder willen vullen tijdens het uitvoeren van de code, doen we dat zo:
 
+```python
 sess.run(cost, feed_dict={x_:[[0,0],[0,1],[1,0],[1,1]]})
+```
 Vervolgens zijn er de overige variabelen die de gewichten van de theta en bias bevatten. Deze moeten wel direct een initiële waarde krijgen, die tijdens het trainen worden geüpdatet. Hieronder maken we de variabele Theta1 aan met een matrix van 2x2, die elk een random waarde krijgen tussen de -1 en 1.
-
+```python
 Theta1 = tf.Variable(tf.random_uniform([2,2], -1, 1), name="Theta1")
+```
 ## Aanleren van XOR
-Input	Output
-X1	X2	Y
-0	0	0
-0	1	1
-1	0	1
-1	1	0
+|Input	|Output|
+----------------
+|X1	|X2 |Y|
+|0	|0	|0|
+|0	|1	|1|
+|1	|0	|1|
+|1	|1	|0|
+
 In dit practicum is het de bedoeling dat we in Python een applicatie schrijven om met TensorFlow een XOR te “leren”. Een XOR-poort is een booleaanse operator. Hiernaast zie je de waarheidstabel van deze poort met twee input waardes. De waarde van de output is 1 als een van de ingangen 1 is maar niet beide.
 
 Voor dit practicum gaan we 2 input waardes gebruiken en 1 output. In TensorFlow wordt de input een matrix, zoals eerder beschreven, met alle waardes en de output wordt een matrix met verwachte 4 waardes.
