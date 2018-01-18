@@ -7,7 +7,7 @@ Problemen oplossen door middel van machine learning is niet altijd de meest hand
 Dit komt namelijk doordat er vaak veel van de computer danwel grafische processor geeist wordt. Ook moet er altijd een trainingsset beschikbaar zijn om de machine een patroon te leren herkennen.
 In dit document gaan we een simpele booleaanse logische gate proberen in een neuraal netwerk na te bouwen. We doen dit voor de XOR operatie.
 
-##A.I. Intro
+## A.I. Intro
 Kunstmatige intelligentie is gemodelleerd naar menselijke intelligentie. Het verbaast dan ook niet dat alle terminilogie zoals neuronen gewoonweg overgenomen zijn van wat wij mensen weten van menselijke en dierlijke intelligentie.
 Om deze neuronen na te bootsen is er met de booleaanse computerlogica veel van deze schakelingen en berekeningen nodig om een enkele neuron te simuleren. Het mag dan duidelijk zijn dat complexe operaties ook veel meer neuronen en dus ook veel meer computerkracht nodig hebben.
 Hoewel het process met een grote stap versneld kan worden met Grafische processing units van videokaarten, is dit slechts een optie waarbij veel berekingen paralel aan elkaar berekend kunnen worden. En hoewel dit vaak het geval is,
@@ -59,46 +59,38 @@ Vervolgens zijn er de overige variabelen die de gewichten van de theta en bias b
 Theta1 = tf.Variable(tf.random_uniform([2,2], -1, 1), name="Theta1")
 ```
 ## Aanleren van XOR
-|Input	|Output|
-----------------
-|X1	|X2 |Y|
-|0	|0	|0|
-|0	|1	|1|
-|1	|0	|1|
-|1	|1	|0|
+
+|  Input     |  |Output   |
+|---|---|---|
+| X1  | X2  |  Y |
+|  0 | 0  |  0 |
+|  0 | 1  |  1 |
+|  1 | 0  |  1 |
+|  1 | 1  |  0 |
 
 In dit practicum is het de bedoeling dat we in Python een applicatie schrijven om met TensorFlow een XOR te “leren”. Een XOR-poort is een booleaanse operator. Hiernaast zie je de waarheidstabel van deze poort met twee input waardes. De waarde van de output is 1 als een van de ingangen 1 is maar niet beide.
 
 Voor dit practicum gaan we 2 input waardes gebruiken en 1 output. In TensorFlow wordt de input een matrix, zoals eerder beschreven, met alle waardes en de output wordt een matrix met verwachte 4 waardes.
 
 ## Installeren TensorFlow
-Om TensorFlow te kunnen gebruiken in python moet je het eerst installeren. Zie voor nieuwste handleiding: https://www.tensorflow.org/get_started/os_setup
-
-Wij hebben het op een virtuele machine gedaan, met daarop Ubuntu/Linux 64-bit en Python versie 2.7.
-
-1)	Installeer pip:
-a.	sudo apt-get install python-pip python-dev
-2)	Set de juiste download op (check de site voor goede versie):
-a.	export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.0rc1-cp27-none-linux_x86_64.whl
-3)	Installeer TensorFlow:
-a.	sudo pip install --upgrade $TF_BINARY_URL
+Voor het installeren van tensorflow verwijs ik je naar de uitleg van [intro to tensorflow](intro_to_tensorflow.md)
 
 Om te testen of TensorFlow succesvol is geïnstalleerd, run dit python scriptje:
 
 ```python
 
->>> import tensorflow as tf
->>> hello = tf.constant('Hello, TensorFlow!')
->>> sess = tf.Session()
->>> print(sess.run(hello))
+import tensorflow as tf
+hello = tf.constant('Hello, TensorFlow!')
+sess = tf.Session()
+print(sess.run(hello))
 Hello, TensorFlow!
->>> a = tf.constant(10)
->>> b = tf.constant(32)
->>> print(sess.run(a + b))
+a = tf.constant(10)
+b = tf.constant(32)
+print(sess.run(a + b))
 42
 ```
 ## Uitleg Python Tensorflow code
-Als TensorFlow is geïnstalleerd kan je de volledige code runnen. Download en run: https://github.com/StephenOman/TensorFlowExamples/tree/master/xor%20nn 
+Als TensorFlow is geïnstalleerd kan je de volledige code runnen. Download en run: [https://github.com/StephenOman/TensorFlowExamples/tree/master/xor](https://github.com/StephenOman/TensorFlowExamples/tree/master/xor%20nn) 
 
 We zullen hieronder de belangrijkste regels toelichten zodat het enigszins duidelijk wordt wat er gebeurd.
 
