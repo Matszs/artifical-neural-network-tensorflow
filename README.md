@@ -1,7 +1,9 @@
 # Artificial Neural Network maken met TensorFlow
 
-Dit document beschrijft de basis van het werken met Tensorflow. Met deze handleiding leer je de
-beginselen van het werken met Tensorflow in Python. Er wordt verwacht dat je bekend bent met Python en dat je 
+<img src="https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688">
+
+Dit document beschrijft de basis van het werken met TensorFlow. Met deze handleiding leer je de
+beginselen van het werken met TensorFlow in Python. Er wordt verwacht dat je bekend bent met Python en dat je 
 basiskennis hebt van Artifical Neural Networks (ANN's).
 
 ### Leerdoelen
@@ -24,31 +26,15 @@ artificial intelligence, computer vision en predictive analysis. TensorFlow is e
 een enkele smartphone draaien als op duizenden computers in een datacenter. Naast dat TensorFlow berekeningen op meerdere 
 computers kan uitvoeren kan het ook berekeningen over meerdere CPUs en GPUs verdelen.
 
-De library heeft een API voor de programmeertalen Python en C++. Daarnaast zijn er experimentele APIs voor Go en Java. 
-Tijdens deze opdracht gaan we met de Python API aan de slag.
-
-### Installeren
-
-Om aan de slag te kunnen gaan met Tensorflow en Python moet je een aantal stappen uitvoeren. Zorg ervoor dat je de juiste
-versie van Python (2.7 of 3) geïnstalleerd hebt. Kies eventueel voor een 'virtual environment' 
-(http://docs.python-guide.org/en/latest/dev/virtualenvs/). Daarnaast is het nodig om 'pip' te hebben, door middel van 
-deze package manager gaan we namelijk de nodige libraries installeren.
-
-* Installeer de Tensorflow-package via: 
-	Python 2.7: ```pip install tensorflow```
-	of
-	Python 3.0: ```pip3 install tensorflow```
-
-(Zorg voor een recente versie van pip en Python om fouten te voorkomen.)
-
-
-##### Numerieke berekeningen
-In plaats van dat Google TensorFlow een library voor machine learning noemt, gebruikt Google de bredere term “numerieke 
-berekeningen”. Het primaire doel van TensorFlow is niet het leveren van out of the box machine learning oplossingen. In 
+Het primaire doel van TensorFlow is niet het leveren van out of the box 'machine learning' oplossingen. In 
 plaats daarvan levert TensorFlow een breed scala aan klassen en functies die gebruikt kunnen worden om vanaf nul 
 wiskundige modellen te maken.
 
-##### Data flow graphs
+De library heeft een API voor de programmeertalen Python en C++. Daarnaast zijn er experimentele APIs voor Go en Java. 
+Tijdens deze opdracht gaan we met de Python API aan de slag.
+
+### Data flow graphs
+
 Een belangrijke datastructuur binnen TensorFlow is de data flow graph. Een data flow graph is een gerichte graaf met 
 edges en nodes. De nodes in een data flow graph representeren berekeningen (ops of operations genoemd), terwijl de edges 
 multidimensionale data arrays (tensors) representeren. Een op neemt als input 0 of meerdere tensors, voert een 
@@ -61,33 +47,53 @@ construction phase wordt er een een data flow graph geconstrueerd terwijl ops in
 worden uitgevoerd.
 Eerste stappen
 
-Voordat we met TensorFlow kunnen beginnen moet je het installeren. Zorg ervoor dat je python 2 en pip reeds op je 
-machine hebt geïnstalleerd. Voer het volgende commando uit: pip install tensorflow.
-Voer vervolgens het commando python uit en voer de volgende regels code uit:
+### Installeren
 
-<pre>
+Om aan de slag te kunnen gaan met Tensorflow en Python moet je een aantal stappen uitvoeren. Zorg ervoor dat je de 
+juiste versie van Python (2.7 of 3) geïnstalleerd hebt. Kies eventueel voor een 'virtual environment' 
+(http://docs.python-guide.org/en/latest/dev/virtualenvs/). Daarnaast is het nodig om 'pip' te hebben, door middel van 
+deze package manager gaan we namelijk de nodige libraries installeren.
+
+* Installeer de Tensorflow-package via: 
+	Python 2.7: ```pip install tensorflow```
+	of
+	Python 3.0: ```pip3 install tensorflow```
+
+(Zorg voor een recente versie van pip en Python om fouten te voorkomen.)
+
+### Je eerste TensorFlow programma
+
+Je eerste voorbeeld voor een TensorFlow programma is natuurlijk zoals in elke taal een 'Hello World!'! Ook met 
+TensorFlow is het mogelijk om dit te doen, dit kan als volgt:
+
+```
 import tensorflow as tf
 
 hello = tf.constant('Hello world!')
 sess = tf.Session()
 
 print sess.run(hello)
-</pre>
+```
 
-Als het goed is zie je nu de tekst “Hello world!” op het scherm verschijnen. Zo niet, dan is er wat fout gegaan met de installatie van TensorFlow. Probeer dit eerst op te lossen voordat je verder gaat.
-We kunnen met TensorFlow een simpele rekensom uitvoeren:
-<pre>
+Als het goed is zie je nu de tekst “Hello world!” op het scherm verschijnen. Zo niet, dan is er wat fout gegaan met de 
+installatie van TensorFlow. Probeer dit eerst op te lossen voordat je verder gaat. Mocht je wel de tekst te zien krijgen
+is het je gelukt en kan je doorgaan.
+
+Nu gaan we een stap verder. We gaan nu een programma draaien welke een vermenigvuldiging uitvoert:
+
+We kunnen met TensorFlow een rekensom uitvoeren:
+```
 import tensorflow as tf
 
 op1 = tf.constant(5)
 op2 = tf.constant(3)
 
-product = tf.mul(op1, op2)
+product = tf.multiply(op1, op2)
 
 session = tf.Session()
-print session.run(product)
+print(session.run(product))
 session.close()
-</pre>
+```
 
 Wat we hier doen is twee ops aanmaken met tf.constant. De ops hebben geen input nodig, maar geven als output een tensor 
 die gelijk is aan de waarde die je hebt meegegeven aan de constructor (5 en 3). We maken ook een op aan die twee inputs 
@@ -99,10 +105,12 @@ nu een sessie aan waarbinnen de berekeningen plaatsvinden. Als je aan de constru
 wordt de sessie aan de default graph gekoppeld. Met session.run voer je de berekeningen uit en door product als argument 
 te geven geef je aan dat je het resultaat van de vermenigvuldiging wilt hebben. Tot slot sluiten we de sessie af, zodat 
 resources vrijgegeven kunnen worden.
-Tensors hebben 3 eigenschappen: rank, shape en data type. De mul op in TensorFlow ondersteunt broadcasting. Broadcasting 
-treedt op als je twee tensors met een andere shape met elkaar vermenigvuldigt. Maak een script dat de tafels van 1 tot 
-en met 10 print met behulp van twee tensors die je met elkaar vermenigvuldigt. Maak gebruik van broadcasting. Zie de API 
-documentatie voor meer informatie (https://www.tensorflow.org/versions/r0.11/api_docs/python/).
+Tensors hebben 3 eigenschappen: rank, shape en data type. De multiply op in TensorFlow ondersteunt broadcasting. 
+Broadcasting treedt op als je twee tensors met een andere shape met elkaar vermenigvuldigt.
+
+* Opdracht: Maak een script dat de tafels van 1 tot en met 10 print met behulp van twee tensors die je met elkaar 
+vermenigvuldigt. Maak gebruik van broadcasting. Zie de API documentatie voor meer informatie 
+(https://www.tensorflow.org/versions/r0.11/api_docs/python/).
 
 
 ### Perceptron
@@ -116,16 +124,16 @@ inputs = tf.placeholder(tf.int32, shape=(2))
 weights = tf.constant([1, 1])
 threshold = tf.constant(2)
 
-perceptron = tf.mul(inputs, weights)
+perceptron = tf.multiply(inputs, weights)
 result = tf.reduce_sum(perceptron)
 
 activation_function = tf.greater_equal(result, threshold)
 
 with tf.Session() as sess:
-        print sess.run(activation_function, feed_dict={inputs: [0, 0]})
-        print sess.run(activation_function, feed_dict={inputs: [1, 0]})
-        print sess.run(activation_function, feed_dict={inputs: [0, 1]})
-        print sess.run(activation_function, feed_dict={inputs: [1, 1]})
+        print(sess.run(activation_function, feed_dict={inputs: [0, 0]}))
+        print(sess.run(activation_function, feed_dict={inputs: [1, 0]}))
+        print(sess.run(activation_function, feed_dict={inputs: [0, 1]}))
+        print(sess.run(activation_function, feed_dict={inputs: [1, 1]}))
 </pre>
 
 
@@ -135,8 +143,9 @@ De op reduce_sum geeft de som van alle elementen en greater_equal geeft 0 als re
 en 1 als result gelijk aan of groter is dan threshold.
 
 Het is moglijk om een AND en OR gate met 1 perceptron te simuleren. Echter is het niet mogelijk om een XOR gate met maar 
-1 perceptron te simuleren. Hoeveel perceptrons heb je hiervoor nodig? Maak met TensorFlow een ANN die een XOR gate 
-simuleert.
+1 perceptron te simuleren. Hoeveel perceptrons heb je hiervoor nodig? 
+
+* Opdracht: Maak met TensorFlow een ANN die een XOR gate simuleert.
 
 
 ### Bronnen
