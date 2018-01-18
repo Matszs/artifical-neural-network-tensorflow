@@ -1,6 +1,6 @@
 # Artificial Neural Network maken met TensorFlow
 
-<img src="https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688">
+![TensorFlow Logo](https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688)
 
 Dit document beschrijft de basis van het werken met TensorFlow. Met deze handleiding leer je de
 beginselen van het werken met TensorFlow in Python. Er wordt verwacht dat je bekend bent met Python en dat je 
