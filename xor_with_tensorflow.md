@@ -1,5 +1,7 @@
+# Xor met TensorFlow
+
 ![TensorFlow Logo](https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688)
-# XOR MET TENSORFLOW
+
 Auteurs: Mats Otten en Patrick Hendriks
 
 Machine learning wordt vaak toegepast op problemen waar mensen geen directe logische oplossing voor lijken te hebben.
@@ -13,34 +15,18 @@ Om deze neuronen na te bootsen is er met de booleaanse computerlogica veel van d
 Hoewel het process met een grote stap versneld kan worden met Grafische processing units van videokaarten, is dit slechts een optie waarbij veel berekingen paralel aan elkaar berekend kunnen worden. En hoewel dit vaak het geval is,
 is het slechts voor het aantal neuronen gelijktijdig in een layer. En een complex machine learning programma bestaat vaak ook uit meerdere layers. 
 
-Het probleem wat kunstmatige intelligentie kan oplossen is vaak eenzijdig. Er is een grote set aan data nodig om een machine een overeenkomst 
+Het probleem wat kunstmatige intelligentie kan oplossen is vaak eenzijdig. Er is een grote set aan data nodig om een machine een overeenkomst te doen vinden. Maar voor bijvoorbeeld onderzoek naar huidkanker is het juist heel handig om 1 ding heel goed te kunnen. 
 
 ### TensorFlow
 TensorFlow is een open source machine learning framework. Er zijn ook nog andere frameworks beschikbaar om machine learning problemen mee op te lossen zoals Theano maar TensorFlow is de meest bekende en daardoor zul je waarschijnlijk ook het snelste meer en betere uitleg hebben over tensorflow dan anderen.
-
-#### Lagen en gewichten
-Om te beginnen met het opzetten van je neurale netwerk moet je natuurlijk weten hoeveel input neuronen je hebt, hoeveel hidden layers en hidden neuronen en tot slot het aantal output neuronen.
-
-Dan, voordat je het neurale netwerk traint, moet je initiële waardes geven voor de gewichten van iedere “lijn”. Gewichten voor normale connecties tussen neuronen noemen we theta (θ). In TensorFlow zijn dit zogenoemde matrixen die alle gewichten van connecties tussen twee lagen bevat.
- 
-
-De theta matrix van bovenstaande neuraal netwerk, met bias neuronen (groen) ziet er dus zo uit voor laag 1 (rechts)
-
-	
-Theta1 = gewichten van input layer naar hidden layer. 
-Theta2 = gewichten van hidden layer naar output layer
-
-De gewichten starten met willekeurig getal tussen -1 en 1. Deze waardes worden bij iedere iteratie geüpdatet om de error ten opzichte van het gewenste resultaat te verminderen. Let op dat wij in TensorFlow bij de theta de bias connecties niet meenemen. Deze behandelen we in een aparte matrix.
-
-Bias1 = gewicht/waarde van de bias van input layer naar hidden layer
-Bias2 = gewicht/waarde van de bias van hidden layer naar output layer
-
-De gewichten van de bias connecties geven we initieel een 0. Ook deze worden tijdens het leerproces veranderd naar de waardes die het beste resultaat geeft.
+Om deze reden gaan we in dit voorbeeld ook aan de slag met TensorFlow. Een nadeel van TensorFlow is dat deze (nog) niet geschikt is voor GPU berekeningen over openCl. OpenCL is de GPU verwerkings api van fabrikanten zoals Intel en AMD.
+Wel heeft TensorFlow ondersteuning voor Nvidia CUDA framework. Waardoor je berekeningen een stuk sneller zullen verlopen. Waar je voorheen expliciet code moest schrijven om de gpu aan te sturen kijken nieuwere versies van TensorFlow of er een CUDA compatible gpu aanwezig is.
+Wanneer deze aanwezig is zal TensorFlow automatisch gebruik maken van de GPU.
 
 #### Matrixen
-Zoals eerder gezegd maken we in TensorFlow gebruik van matrixen. Dit zijn eigenlijk één- of meerdimensionale arrays. Eendimensionale matrixen worden ook wel vectors genoemd. Het voordeel van het gebruiken van Matrixen is dat je in TensorFlow op een gemakkelijke manier deze met elkaar kunt vermenigvuldigen, of natuurlijk andere wiskundige operaties mee kunt uitvoeren.
+TensorFlow maakt gebruik van matrixen. Dit zijn één- of meerdere dimensionale arrays. Eendimensionale matrixen worden ook wel vectors genoemd. Het voordeel van het gebruiken van Matrixen is dat je in TensorFlow op een gemakkelijke manier er wiskundige operaties op kunt uitvoeren.
 
-Het vermenigvuldigen van input matrix x_ met de bijbehorende gewichten:
+Het vermenigvuldigen van input matrix x_ met de bijbehorende gewichten doen we als volgt:
 ```python
 tf.matmul(x_, Theta1)
 ```
@@ -78,7 +64,6 @@ Voor het installeren van tensorflow verwijs ik je naar de uitleg van [intro to t
 Om te testen of TensorFlow succesvol is geïnstalleerd, run dit python scriptje:
 
 ```python
-
 import tensorflow as tf
 hello = tf.constant('Hello, TensorFlow!')
 sess = tf.Session()
@@ -127,8 +112,9 @@ A2 = tf.sigmoid(tf.matmul(x_, Theta1) + Bias1)
 Let op dat we hier alleen de “opzet” van de variabele A2 creëren, pas tijdens het runnen van de code wordt hiervoor de waarde berekend. (Zie sess.run()).
 ```
 Hierna moeten we hetzelfde doen bij de output layer. Om de “voorspelling” te krijgen. We gebruiken nu dus de output van laag 2 (hidden layer) en de bijbehorende bias en gewichten:
-
+```python
 Hypothesis = tf.sigmoid(tf.matmul(A2, Theta2) + Bias2)
+```
 Nu moeten we met de cost functie gaan kijken hoe ver de voorspelling van de werkelijke output vandaag zit:
 
 ```python
@@ -140,8 +126,7 @@ De volgende stap is om alle gewichten zodanig te veranderen dat de uitkomst van 
 ```python
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
 ```
-Dit commando zegt dat we de Gradient Descent Optimizer als trainingsalgoritme gaan gebruiken. De 0.01 betekend hoe veel de gewichten veranderd mogen worden. Voor dit experiment is 0.01 een goede waarde.
-
+Dit commando zegt dat we de Gradient Descent Optimizer als trainingsalgoritme gaan gebruiken. De verandering gaat in kleine stappen. Zo kan het langer duren voordat de oplossing er is maar zorgen we ervoor dat we niet over de oplossing heen springen.
 Nu we het netwerk hebben opgezet moeten we wat initialisaties doen:
 ```python
 XOR_X = [[0,0],[0,1],[1,0],[1,1]]
@@ -167,10 +152,27 @@ if i % 1000 == 0:
         print('Bias2 ', sess.run(Bias2))
         print('cost ', sess.run(cost, feed_dict={x_: XOR_X, y_: XOR_Y}))
 ```
-TensorFlow heft ook een tool genaamd TensorBoard. Hier kan je visuele weergave van je neurale netwerk bekijken, in de vorm van een directed graph. Hiervoor hebben we bij de initialisatie de log toegevoegd:
-```python
-writer = tf.train.SummaryWriter("./logs/xor_logs", sess.graph_def)
-En nu kan je TensorBoard starten met:
-```
-tensorboard --logdir=/path/to/your/log/file/folder
-Je krijgt dan zoiets te zien: 
+
+### Bronnen
+* https://www.tensorflow.org/
+* https://aimatters.wordpress.com/2016/01/16/solving-xor-with-a-neural-network-in-tensorflow/
+
+### Versiebeheer
+
+<table>
+	<tr>
+		<th>Auteur</th>
+		<th>Wijzigingen</th>
+		<th>Datum</th>
+	</tr>
+	<tr>
+		<td>Patrick Hendriks</td>
+		<td>Verbeteringen aangebracht en extra uitleg bij bepaalde stukken code</td>
+		<td>19 januari 2018</td>
+	</tr>
+	<tr>
+		<td>Chris Eijgenstijn en Mitchel Nijdam</td>
+		<td>Initieel document document</td>
+		<td>2016 - 2017</td>
+	</tr>
+</table>
