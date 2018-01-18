@@ -1,4 +1,4 @@
-![TF logo](tf_logo.png "TensorFlow")
+![TensorFlow Logo](https://lh3.googleusercontent.com/hIViPosdbSGUpLmPnP2WqL9EmvoVOXW7dy6nztmY5NZ9_u5lumMz4sQjjsBZ2QxjyZZCIPgucD2rhdL5uR7K0vLi09CEJYY=s688)
 #XOR MET TENSORFLOW
 Auteurs: Mats Otten en Patrick Hendriks
 
@@ -18,7 +18,7 @@ Het probleem wat kunstmatige intelligentie kan oplossen is vaak eenzijdig. Er is
 ### TensorFlow
 TensorFlow is een open source machine learning framework. Er zijn ook nog andere frameworks beschikbaar om machine learning problemen mee op te lossen zoals Theano maar TensorFlow is de meest bekende en daardoor zul je waarschijnlijk ook het snelste meer en betere uitleg hebben over tensorflow dan anderen.
 
-####1.2.1 Lagen en gewichten
+#### Lagen en gewichten
 Om te beginnen met het opzetten van je neurale netwerk moet je natuurlijk weten hoeveel input neuronen je hebt, hoeveel hidden layers en hidden neuronen en tot slot het aantal output neuronen.
 
 Dan, voordat je het neurale netwerk traint, moet je initiële waardes geven voor de gewichten van iedere “lijn”. Gewichten voor normale connecties tussen neuronen noemen we theta (θ). In TensorFlow zijn dit zogenoemde matrixen die alle gewichten van connecties tussen twee lagen bevat.
@@ -37,13 +37,13 @@ Bias2 = gewicht/waarde van de bias van hidden layer naar output layer
 
 De gewichten van de bias connecties geven we initieel een 0. Ook deze worden tijdens het leerproces veranderd naar de waardes die het beste resultaat geeft.
 
-####1.2.2 Matrixen
+#### Matrixen
 Zoals eerder gezegd maken we in TensorFlow gebruik van matrixen. Dit zijn eigenlijk één- of meerdimensionale arrays. Eendimensionale matrixen worden ook wel vectors genoemd. Het voordeel van het gebruiken van Matrixen is dat je in TensorFlow op een gemakkelijke manier deze met elkaar kunt vermenigvuldigen, of natuurlijk andere wiskundige operaties mee kunt uitvoeren.
 
 Het vermenigvuldigen van input matrix x_ met de bijbehorende gewichten:
 
 tf.matmul(x_, Theta1)
-####1.2.3 Variabelen
+#### Variabelen
 In TensorFlow heb je twee soorten variabelen. De eerste soort variabelen heten placeholder en worden voornamelijk gebruikt voor je input (trainings-) data. De naam placeholder komt voor uit het feit dat ze niet gelijk geïnitialiseerd worden, maar tijdens het trainen iedere keer een nieuwe (of dezelfde) trainingsdata krijgen toegewezen. Hieronder maken we een placeholder aan van het type float32 en een grootte van een matrix van 4x2.
 
 x_ = tf.placeholder(tf.float32, shape=[4,2], name="x-input")
@@ -53,7 +53,7 @@ sess.run(cost, feed_dict={x_:[[0,0],[0,1],[1,0],[1,1]]})
 Vervolgens zijn er de overige variabelen die de gewichten van de theta en bias bevatten. Deze moeten wel direct een initiële waarde krijgen, die tijdens het trainen worden geüpdatet. Hieronder maken we de variabele Theta1 aan met een matrix van 2x2, die elk een random waarde krijgen tussen de -1 en 1.
 
 Theta1 = tf.Variable(tf.random_uniform([2,2], -1, 1), name="Theta1")
-##2. Aanleren van XOR
+## Aanleren van XOR
 Input	Output
 X1	X2	Y
 0	0	0
@@ -64,7 +64,7 @@ In dit practicum is het de bedoeling dat we in Python een applicatie schrijven o
 
 Voor dit practicum gaan we 2 input waardes gebruiken en 1 output. In TensorFlow wordt de input een matrix, zoals eerder beschreven, met alle waardes en de output wordt een matrix met verwachte 4 waardes.
 
-##3. Installeren TensorFlow
+## Installeren TensorFlow
 Om TensorFlow te kunnen gebruiken in python moet je het eerst installeren. Zie voor nieuwste handleiding: https://www.tensorflow.org/get_started/os_setup
 
 Wij hebben het op een virtuele machine gedaan, met daarop Ubuntu/Linux 64-bit en Python versie 2.7.
@@ -90,7 +90,7 @@ Hello, TensorFlow!
 >>> print(sess.run(a + b))
 42
 ```
-##4. Uitleg Python Tensorflow code
+## Uitleg Python Tensorflow code
 Als TensorFlow is geïnstalleerd kan je de volledige code runnen. Download en run: https://github.com/StephenOman/TensorFlowExamples/tree/master/xor%20nn 
 
 We zullen hieronder de belangrijkste regels toelichten zodat het enigszins duidelijk wordt wat er gebeurd.
