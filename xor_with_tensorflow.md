@@ -83,11 +83,10 @@ import tensorflow as tf
 hello = tf.constant('Hello, TensorFlow!')
 sess = tf.Session()
 print(sess.run(hello))
-Hello, TensorFlow!
+
 a = tf.constant(10)
 b = tf.constant(32)
 print(sess.run(a + b))
-42
 ```
 ## Uitleg Python Tensorflow code
 Als TensorFlow is geïnstalleerd kan je de volledige code runnen. Download en run: [https://github.com/StephenOman/TensorFlowExamples/tree/master/xor](https://github.com/StephenOman/TensorFlowExamples/tree/master/xor%20nn) 
@@ -99,12 +98,16 @@ Als eerste moeten we TensorFlow in ons programma laden:
 ```python
 import tensorflow as tf
 ```
-Daarna maken we placeholders voor de trainingsdata, de input (x) en de output (y):
+Dat de import as tf gebruikt is voor het gemak. Wanneer je as tf gebruikt hoef je niet elke functie van tensorflow met de naam van klasse tensorflow aan te roepen.
+
+Vervolgens maken we placeholders voor de trainingsdata, de input (x) en de output (y):
 
 ```python
 x_ = tf.placeholder(tf.float32, shape=[4,2], name="x-input")
 y_ = tf.placeholder(tf.float32, shape=[4,1], name="y-input")
 ```
+Placeholders zijn min of meer de input data in de code direct meegegeven. Normaliter laat je een heleboel data in via bijvoorbeeld een csv.
+
 Met de shape parameter geven we aan welke dimensies de data die we erin gaan stoppen heeft.
 
 Vervolgens maken we de variabelen aan die de gewichten gaan onthouden. We geven ze direct een random array/matrix met waardes tussen -1 en 1:
@@ -112,12 +115,13 @@ Vervolgens maken we de variabelen aan die de gewichten gaan onthouden. We geven 
 Theta1 = tf.Variable(tf.random_uniform([2,2], -1, 1), name="Theta1")
 Theta2 = tf.Variable(tf.random_uniform([2,1], -1, 1), name="Theta2")
 ```
-De gewichten van de bias nodes/neuronen gaan we apart aanmaken, maar zijn ook variabelen Deze geven we de waarde 0:
+De gewichten van de bias nodes/neuronen gaan we apart aanmaken. Deze geven we de waarde 0:
 ```python
 Bias1 = tf.Variable(tf.zeros([2]), name="Bias1")
 Bias2 = tf.Variable(tf.zeros([1]), name="Bias2")
 ```
-Vervolgens moeten we waardes van de output van de hidden layer bereken. Dit doen we door de waardes van de inputs te vermenigvuldigen met bijbehorende gewichten, vervolgens de bias erbij optellen en deze in de sigmoid functie te stoppen:
+Dat we deze variabelen op 0 zetten is niet erg aangezien deze door de berekeningen zelf gecorigeerd gaan worden met zinnige waarden.
+Vervolgens moeten we waarden van de output van de hidden layer berekenen. Dit doen we door de waardes van de inputs te vermenigvuldigen met bijbehorende gewichten, vervolgens de bias erbij optellen en deze in de sigmoid functie te stoppen:
 ```python
 A2 = tf.sigmoid(tf.matmul(x_, Theta1) + Bias1)
 Let op dat we hier alleen de “opzet” van de variabele A2 creëren, pas tijdens het runnen van de code wordt hiervoor de waarde berekend. (Zie sess.run()).
