@@ -1,18 +1,20 @@
 # Artificial Neural Network maken met TensorFlow
 
 Dit document beschrijft de basis van het werken met Tensorflow. Met deze handleiding leer je de
-beginselen van het werken met Tensorflow in Python. 
-
-### Vereisten
-Er wordt vanuit gegaan dat de lezer reeds over deze kennis beschikt:
-* De programmeertaal Python.
-* Basiskennis van artificial neural networks.
+beginselen van het werken met Tensorflow in Python. Er wordt verwacht dat je bekend bent met Python en dat je 
+basiskennis hebt van Artifical Neural Networks (ANN's).
 
 ### Leerdoelen
 Aan het eind van deze opdracht kun je de volgende dingen:
 * Uitleggen wat TensorFlow is.
 * De basis van TensorFlow begrijpen en uitleggen.
 * Een simpele artificial neural netwerk maken met TensorFlow.
+
+
+### Technische vereisten
+Er wordt vanuit gegaan dat de lezer reeds over deze kennis beschikt:
+* Python ontwikkelomgeving, minimaal versie 2.7 of versie 3.
+* pip for Python (package manager), om libraries te kunnen installeren.
 
 
 ### Wat is TensorFlow?
@@ -24,6 +26,21 @@ computers kan uitvoeren kan het ook berekeningen over meerdere CPUs en GPUs verd
 
 De library heeft een API voor de programmeertalen Python en C++. Daarnaast zijn er experimentele APIs voor Go en Java. 
 Tijdens deze opdracht gaan we met de Python API aan de slag.
+
+### Installeren
+
+Om aan de slag te kunnen gaan met Tensorflow en Python moet je een aantal stappen uitvoeren. Zorg ervoor dat je de juiste
+versie van Python (2.7 of 3) geïnstalleerd hebt. Kies eventueel voor een 'virtual environment' 
+(http://docs.python-guide.org/en/latest/dev/virtualenvs/). Daarnaast is het nodig om 'pip' te hebben, door middel van 
+deze package manager gaan we namelijk de nodige libraries installeren.
+
+* Installeer de Tensorflow-package via: 
+	Python 2.7: ```pip install tensorflow```
+	of
+	Python 3.0: ```pip3 install tensorflow```
+
+(Zorg voor een recente versie van pip en Python om fouten te voorkomen.)
+
 
 ##### Numerieke berekeningen
 In plaats van dat Google TensorFlow een library voor machine learning noemt, gebruikt Google de bredere term “numerieke 
@@ -44,7 +61,8 @@ construction phase wordt er een een data flow graph geconstrueerd terwijl ops in
 worden uitgevoerd.
 Eerste stappen
 
-Voordat we met TensorFlow kunnen beginnen moet je het installeren. Zorg ervoor dat je python 2 en pip reeds op je machine hebt geïnstalleerd. Voer het volgende commando uit: pip install tensorflow.
+Voordat we met TensorFlow kunnen beginnen moet je het installeren. Zorg ervoor dat je python 2 en pip reeds op je 
+machine hebt geïnstalleerd. Voer het volgende commando uit: pip install tensorflow.
 Voer vervolgens het commando python uit en voer de volgende regels code uit:
 
 <pre>
@@ -127,6 +145,7 @@ simuleert.
 * https://www.tensorflow.org/versions/master/api_docs/
 * https://www.oreilly.com/learning/hello-tensorflow
 * https://www.tensorflow.org/get_started/basic_usage
+* https://www.tensorflow.org/install/install_linux
 * TensorFlow for Machine Intelligence: A Hands-On Introduction to Learning Algorithms (ISBN: 1939902452)
 
 ### Versiebeheer
@@ -138,6 +157,11 @@ simuleert.
 		<th>Auteur</th>
 		<th>Wijzigingen</th>
 		<th>Datum</th>
+	</tr>
+	<tr>
+		<td>Mats Otten</td>
+		<td>Verbeteringen document, duidelijkere installatie handleiding</td>
+		<td>19 januari 2018</td>
 	</tr>
 	<tr>
 		<td>Joris van der Kallen</td>
